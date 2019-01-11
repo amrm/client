@@ -1,0 +1,46 @@
+<mat-toolbar>
+  <span class="title-center">{{employee.name ? 'Edit' : 'Add'}} Employee</span>
+</mat-toolbar>
+
+<mat-card>
+
+  <form #employeeForm="ngForm" (ngSubmit)="save(employeeForm.value)" class="my-form">
+
+    <mat-card-content>
+      <input type="hidden" name="id" [(ngModel)]="employee.id">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Employee Name" [(ngModel)]="employee.name"
+               required name="name" #name>
+      </mat-form-field>
+
+  	<mat-form-field class="full-width">
+        	<input matInput placeholder="Employee Email" [(ngModel)]="employee.email"
+               required name="email" #email>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-select placeholder="Employee department" [(ngModel)]="employee.department.id"
+                    name="departmentId" required #departmentId>
+          <mat-option *ngFor="let department of departments" [value]="department.id" >
+            {{department.name}}
+          </mat-option>
+        </mat-select>
+
+      </mat-form-field>
+
+	  <mat-form-field class="full-width">
+	        <input matInput placeholder="Employee Salary" [(ngModel)]="employee.salary"
+               required name="salary" #salary>
+      </mat-form-field>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit"
+              [disabled]="!employeeForm.form.valid">Save</button>
+      <button mat-raised-button color="secondary" (click)="remove(employee.id)"
+              *ngIf="employee.id" type="button">Delete</button>
+      <a mat-button routerLink="/employees">Cancel</a>
+    </mat-card-actions>
+
+  </form>
+</mat-card>

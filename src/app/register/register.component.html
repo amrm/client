@@ -1,0 +1,70 @@
+<div *ngIf="isSignedUp; else signupForm">
+  Your registration is successful. Please login!
+</div>
+
+<ng-template #signupForm>
+  <mat-toolbar>
+    <span class="title-center">Registration</span>
+  </mat-toolbar>
+  <mat-card class="my-card">
+    <mat-card-content>
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate class="my-form">
+        <mat-form-field class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="name" name="name" [(ngModel)]="form.name" #name="ngModel" required />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="username" name="username"
+                 [(ngModel)]="form.username" #username="ngModel" required />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="email" name="email" [(ngModel)]="form.email"
+                 #email="ngModel" required email />
+        </mat-form-field>
+
+        <!--<div class="form-group">
+          <label for="role">Role</label>
+          <select name="role" [(ngModel)]="form.role" #role="ngModel" required >
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+          </select>
+          <div *ngIf="f.submitted && role.invalid">
+            <div *ngIf="role.errors.required">Role is required</div>
+          </div>
+        </div>-->
+
+        <mat-form-field class="full-width">
+          <mat-select placeholder="Role" [(ngModel)]="form.role"
+                      name="role" required #role>
+            <mat-option *ngFor="let role of roles" [value]="role.name" >
+              {{role.name}}
+            </mat-option>
+          </mat-select>
+
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput  placeholder="Password" name="password" [(ngModel)]="form.password" #password="ngModel"
+                 required minlength="3" />
+          <div *ngIf="f.submitted && password.invalid">
+            <div *ngIf="password.errors.minlength">Password must be at least 3 characters</div>
+          </div>
+        </mat-form-field>
+
+        <div class="form-group">
+          <button mat-raised-button color="primary">Register</button>
+          <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
+            Signup failed!<br/>{{errorMessage}}
+          </div>
+        </div>
+
+      </form>
+    </mat-card-content>
+
+  </mat-card>
+
+</ng-template>
+

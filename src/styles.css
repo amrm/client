@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+}
+
+table {
+  width: 60%;
+  margin:0 auto;
+}
+
+th {
+  text-align: left;
+}
+
+
+.my-form{
+  min-width: 150px;
+  max-width: 500px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.title-center {
+  margin: 0 auto;
+}
